@@ -4,8 +4,8 @@ const Stopwatch = () => {
   const [started, setStarted] = useState(false)
 
   return (
-    <>
-      <h1 className="text-9xl font-bold text-white text-center">00:00</h1>
+    <div className="flex flex-col">
+      <h1 className="text-8xl md:text-9xl flex-1 font-bold text-white text-center">00:00</h1>
       <div className="grid grid-cols-2 gap-1 mt-2">
         {started ? (
           <>
@@ -33,7 +33,7 @@ const Stopwatch = () => {
           </>
         )}
       </div>
-    </>
+    </div>
   )
 }
 
