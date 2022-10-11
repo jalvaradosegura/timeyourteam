@@ -4,6 +4,8 @@ const Stopwatch = () => {
   const [time, setTime] = useState(0)
   const [timerOn, setTimerOn] = useState(false)
 
+  const [firstTime, setFirstTime] = useState(true)
+
   useEffect(() => {
     let interval = null
 
@@ -17,6 +19,16 @@ const Stopwatch = () => {
 
     return () => clearInterval(interval)
   }, [timerOn])
+
+  const startButtonPressed = () => {
+    setTimerOn(true)
+    setFirstTime(false)
+  }
+
+  const resetButtonPressed = () => {
+    setTime(0)
+    setFirstTime(true)
+  }
 
   return (
     <div className="flex flex-col">
@@ -44,12 +56,21 @@ const Stopwatch = () => {
           </>
         ) : (
           <>
-            <button className="bg-gray-400 px-4 py-2 w-full rounded-xl text-white font-bold hover:bg-gray-500">
-              Reset
-            </button>
+            {firstTime ? (
+              <button className="focus:outline-none disabled bg-gray-400 px-4 py-2 w-full rounded-xl text-white font-bold cursor-not-allowed">
+                Lap
+              </button>
+            ) : (
+              <button
+                className="bg-gray-400 px-4 py-2 w-full rounded-xl text-white font-bold hover:bg-gray-500"
+                onClick={resetButtonPressed}
+              >
+                Reset
+              </button>
+            )}
             <button
               className="bg-green-400 hover:bg-green-500 px-4 py-2 w-full rounded-xl text-white font-bold"
-              onClick={() => setTimerOn(true)}
+              onClick={startButtonPressed}
             >
               Start
             </button>
