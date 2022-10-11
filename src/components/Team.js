@@ -25,17 +25,17 @@ const Team = ({ memberIdx, members }) => {
                 <div
                   key={idx}
                   className={
-                    "flex " +
+                    "flex grid grid-cols-2 w-full " +
                     (memberIdx == idx
                       ? "px-2 bg-green-400 bg-opacity-20 rounded"
                       : "")
                   }
                 >
-                  <p>
+                  <p className="col-span-1 overflow-hidden truncate">
                     {idx + 1}. {member.name}
                   </p>
                   {member.time ? (
-                    <div className="ml-3 flex space-x-2 items-center">
+                    <div className="ml-2 flex space-x-2 items-center col-span-1 justify-start">
                       <b>{formatStopwatchTime(member.membersTime)}</b>
                       <span className="text-xs flex">
                         ({formatStopwatchTime(member.time)})
