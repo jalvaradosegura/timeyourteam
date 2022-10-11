@@ -7,6 +7,7 @@ const AddMemberInput = ({ members, setMembers }) => {
     },
     onSubmit: (values) => {
       setMembers([...members, values.member])
+      formik.resetForm()
     },
   })
 
@@ -36,7 +37,8 @@ const AddMemberInput = ({ members, setMembers }) => {
           className="outline-none block p-4 pl-10 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-orange-300 focus:border-orange-300 "
           placeholder="John Doe"
           onChange={formik.handleChange}
-          value={formik.values.email}
+          value={formik.values.member}
+          required
         />
         <button
           type="submit"
