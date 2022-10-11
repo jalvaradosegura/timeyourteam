@@ -1,11 +1,9 @@
 import { useEffect, useState } from "react"
 
-const Stopwatch = ({ members, setMembers }) => {
+const Stopwatch = ({ memberIdx, members, setMemberIdx, setMembers }) => {
   const [time, setTime] = useState(0)
   const [timerOn, setTimerOn] = useState(false)
   const [newStart, setNewStart] = useState(true)
-
-  const [memberIdx, setMemberIdx] = useState(0)
 
   useEffect(() => {
     let interval = null

@@ -8,14 +8,12 @@ const formatStopwatchTime = (timeStr) => {
     <div className="flex items-center">
       <span>{time[0]}:</span>
       <span>{time[1]},</span>
-      <span>
-        {time[2]}
-      </span>
+      <span>{time[2]}</span>
     </div>
   )
 }
 
-const Team = ({ members }) => {
+const Team = ({ memberIdx, members }) => {
   return (
     <div className="text-white md:h-[284px] h-[172px]">
       <h3 className="text-xl">Team</h3>
@@ -24,7 +22,12 @@ const Team = ({ members }) => {
           <ul className="mt-2">
             {members.map((member, idx) => {
               return (
-                <div key={idx} className="flex">
+                <div
+                  key={idx}
+                  className={
+                    "flex " + (memberIdx == idx ? "px-2 bg-green-400 bg-opacity-20 rounded" : "")
+                  }
+                >
                   <p>
                     {idx + 1}. {member.name}
                   </p>

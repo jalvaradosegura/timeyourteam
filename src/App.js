@@ -3,9 +3,17 @@ import { useEffect, useState } from "react"
 import { AddMemberInput, Stopwatch, Team } from "./components"
 
 const App = () => {
+  const [memberIdx, setMemberIdx] = useState(0)
   const [members, setMembers] = useState(() => {
     const membersSaved = localStorage.getItem("members")
-    const initialValue = JSON.parse(membersSaved)
+    let initialValue = JSON.parse(membersSaved)
+
+    if (initialValue != null) {
+      initialValue = initialValue.map((member, idx) => {
+        return { ...member, time: null }
+      })
+    }
+
     return initialValue || []
   })
 
@@ -23,11 +31,16 @@ const App = () => {
       <div className="grid place-items-center p-4">
         <div className="p-4 max-w-5xl grid gap-4 sm:grid-cols-5 w-full h-full">
           <div className="sm:col-span-3 w-full self-center">
-            <Stopwatch members={members} setMembers={setMembers} />
+            <Stopwatch
+              members={members}
+              setMembers={setMembers}
+              memberIdx={memberIdx}
+              setMemberIdx={setMemberIdx}
+            />
           </div>
           <div className="sm:col-span-2 sm:border-l p-4 space-y-4 w-full h-full flex flex-col justify-center">
             <AddMemberInput members={members} setMembers={setMembers} />
-            <Team members={members} />
+            <Team members={members} memberIdx={memberIdx} />
           </div>
         </div>
       </div>
