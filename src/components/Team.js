@@ -26,7 +26,7 @@ const Team = ({ memberIdx, members }) => {
                   key={idx}
                   className={
                     "flex grid grid-cols-2 w-full gap-2 " +
-                    (memberIdx == idx
+                    (memberIdx === idx
                       ? "px-2 bg-green-400 bg-opacity-20 rounded"
                       : "")
                   }

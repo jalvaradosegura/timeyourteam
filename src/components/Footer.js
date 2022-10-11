@@ -6,6 +6,7 @@ const Footer = () => {
         className="hover:text-slate-200"
         href="https://jorgealvarado.me/"
         target="_blank"
+        rel="noreferrer"
       >
         Jorge Alvarado
       </a>

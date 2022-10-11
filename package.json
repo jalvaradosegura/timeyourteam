@@ -15,6 +15,7 @@
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
+    "deploy-production": "react-scripts build && scp -r ./build/* root@198.199.71.113:/var/www/timeyourteam.com/html",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
   },
