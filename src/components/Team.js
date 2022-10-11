@@ -1,3 +1,20 @@
+const formatStopwatchTime = (timeStr) => {
+  if (timeStr == null) {
+    return null
+  }
+
+  let time = timeStr.split(":")
+  return (
+    <div className="flex items-center">
+      <span>{time[0]}:</span>
+      <span>{time[1]},</span>
+      <span>
+        {time[2]}
+      </span>
+    </div>
+  )
+}
+
 const Team = ({ members }) => {
   return (
     <div className="text-white md:h-[284px] h-[172px]">
@@ -8,8 +25,10 @@ const Team = ({ members }) => {
             {members.map((member, idx) => {
               return (
                 <div key={idx} className="flex">
-                  <p>{idx + 1}. {member.name}</p>
-		  <p className="ml-3">{member.time}</p>
+                  <p>
+                    {idx + 1}. {member.name}
+                  </p>
+                  <div className="ml-3">{formatStopwatchTime(member.time)}</div>
                 </div>
               )
             })}
