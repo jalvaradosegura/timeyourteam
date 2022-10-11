@@ -5,6 +5,8 @@ const Stopwatch = ({ memberIdx, members, setMemberIdx, setMembers }) => {
   const [timerOn, setTimerOn] = useState(false)
   const [newStart, setNewStart] = useState(true)
 
+  const [previousTime, setPreviousTime] = useState(0)
+
   useEffect(() => {
     let interval = null
 
@@ -26,27 +28,44 @@ const Stopwatch = ({ memberIdx, members, setMemberIdx, setMembers }) => {
 
   const resetButtonPressed = () => {
     setTime(0)
+    setPreviousTime(0)
     setMemberIdx(0)
     setNewStart(true)
 
     let newMembers = [...members]
     newMembers = newMembers.map((member, idx) => {
-      return {...member, time: null}
+      return { ...member, time: null }
     })
     setMembers(newMembers)
   }
 
-  const lapButtonPressed = () => {
+  const calculateStopWatchTime = (time) => {
     let minutes = ("0" + Math.floor((time / 60000) % 60)).slice(-2)
     let seconds = ("0" + Math.floor((time / 1000) % 60)).slice(-2)
     let hundredths = ("0" + Math.floor((time / 10) % 100)).slice(-2)
-    let memberTime = `${minutes}:${seconds}:${hundredths}`
+    return `${minutes}:${seconds}:${hundredths}`
+  }
+
+  const lapButtonPressed = () => {
+    let membersTime = time - previousTime
+    let membersTimeStr = calculateStopWatchTime(membersTime)
+    setPreviousTime(time)
+
+    let globalTimeStr = calculateStopWatchTime(time)
 
     let newMembers = [...members]
     if (memberIdx > newMembers.length - 1) {
-      newMembers[memberIdx] = { name: `Member ${memberIdx + 1}`, time: memberTime }
+      newMembers[memberIdx] = {
+        name: `Member ${memberIdx + 1}`,
+        time: globalTimeStr,
+        membersTime: membersTimeStr,
+      }
     } else {
-      newMembers[memberIdx] = { ...newMembers[memberIdx], time: memberTime }
+      newMembers[memberIdx] = {
+        ...newMembers[memberIdx],
+        time: globalTimeStr,
+        membersTime: membersTimeStr,
+      }
     }
 
     setMembers(newMembers)
