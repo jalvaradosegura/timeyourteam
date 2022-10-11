@@ -7,9 +7,10 @@ const Team = ({ members }) => {
           <ul className="mt-2">
             {members.map((member, idx) => {
               return (
-                <li key={idx}>
-                  {idx + 1}. {member}
-                </li>
+                <div key={idx} className="flex">
+                  <p>{idx + 1}. {member.name}</p>
+		  <p className="ml-3">{member.time}</p>
+                </div>
               )
             })}
           </ul>

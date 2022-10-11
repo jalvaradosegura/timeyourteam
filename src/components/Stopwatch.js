@@ -1,10 +1,11 @@
 import { useEffect, useState } from "react"
 
-const Stopwatch = () => {
+const Stopwatch = ({ members, setMembers }) => {
   const [time, setTime] = useState(0)
   const [timerOn, setTimerOn] = useState(false)
+  const [newStart, setNewStart] = useState(true)
 
-  const [firstTime, setFirstTime] = useState(true)
+  const [memberIdx, setMemberIdx] = useState(0)
 
   useEffect(() => {
     let interval = null
@@ -22,21 +23,45 @@ const Stopwatch = () => {
 
   const startButtonPressed = () => {
     setTimerOn(true)
-    setFirstTime(false)
+    setNewStart(false)
   }
 
   const resetButtonPressed = () => {
     setTime(0)
-    setFirstTime(true)
+    setMemberIdx(0)
+    setNewStart(true)
+
+    let newMembers = [...members]
+    newMembers = newMembers.map((member, idx) => {
+      return {...member, time: null}
+    })
+    setMembers(newMembers)
+  }
+
+  const lapButtonPressed = () => {
+    let minutes = ("0" + Math.floor((time / 60000) % 60)).slice(-2)
+    let seconds = ("0" + Math.floor((time / 1000) % 60)).slice(-2)
+    let hundredths = ("0" + Math.floor((time / 10) % 100)).slice(-2)
+    let memberTime = `${minutes}:${seconds}:${hundredths}`
+
+    let newMembers = [...members]
+    if (memberIdx > newMembers.length - 1) {
+      newMembers[memberIdx] = { name: `Member ${memberIdx + 1}`, time: memberTime }
+    } else {
+      newMembers[memberIdx] = { ...newMembers[memberIdx], time: memberTime }
+    }
+
+    setMembers(newMembers)
+    setMemberIdx(() => memberIdx + 1)
   }
 
   return (
     <div className="flex flex-col">
-      <h1 className="text-8xl md:text-9xl flex-1 font-bold text-white flex items-center justify-center">
+      <h1 className="text-8xl md:text-9xl flex-1 font-bold text-white flex justify-center">
         <span>{("0" + Math.floor((time / 60000) % 60)).slice(-2)}:</span>
         <span className="relative">
           {("0" + Math.floor((time / 1000) % 60)).slice(-2)}
-          <span className="absolute text-xl ml-2">
+          <span className="absolute bottom-3 text-xl ml-2">
             {("0" + ((time / 10) % 100)).slice(-2)}
           </span>
         </span>
@@ -44,7 +69,10 @@ const Stopwatch = () => {
       <div className="grid grid-cols-2 gap-1 mt-2">
         {timerOn ? (
           <>
-            <button className="bg-gray-400 px-4 py-2 w-full rounded-xl text-white font-bold hover:bg-gray-500">
+            <button
+              className="bg-gray-400 px-4 py-2 w-full rounded-xl text-white font-bold hover:bg-gray-500"
+              onClick={lapButtonPressed}
+            >
               Lap
             </button>
             <button
@@ -56,7 +84,7 @@ const Stopwatch = () => {
           </>
         ) : (
           <>
-            {firstTime ? (
+            {newStart ? (
               <button className="focus:outline-none disabled bg-gray-400 px-4 py-2 w-full rounded-xl text-white font-bold cursor-not-allowed">
                 Lap
               </button>

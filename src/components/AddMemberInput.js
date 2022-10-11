@@ -6,7 +6,7 @@ const AddMemberInput = ({ members, setMembers }) => {
       member: "",
     },
     onSubmit: (values) => {
-      setMembers([...members, values.member])
+      setMembers([...members, { name: values.member, time: null }])
       formik.resetForm()
     },
   })
