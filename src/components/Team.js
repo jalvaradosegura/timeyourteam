@@ -5,7 +5,7 @@ const formatStopwatchTime = (timeStr) => {
 
   let time = timeStr.split(":")
   return (
-    <div className="flex items-center">
+    <div className="flex">
       <span>{time[0]}:</span>
       <span>{time[1]},</span>
       <span>{time[2]}</span>
@@ -25,7 +25,7 @@ const Team = ({ memberIdx, members }) => {
                 <div
                   key={idx}
                   className={
-                    "flex grid grid-cols-2 w-full " +
+                    "flex grid grid-cols-2 w-full gap-2 " +
                     (memberIdx == idx
                       ? "px-2 bg-green-400 bg-opacity-20 rounded"
                       : "")
@@ -35,11 +35,11 @@ const Team = ({ memberIdx, members }) => {
                     {idx + 1}. {member.name}
                   </p>
                   {member.time ? (
-                    <div className="ml-2 flex space-x-2 items-center col-span-1 justify-start">
-                      <b>{formatStopwatchTime(member.membersTime)}</b>
-                      <span className="text-xs flex">
+                    <div className="flex items-center col-span-1 justify-start grid grid-cols-2 gap-2 md:gap-1">
+                      <div className="">{formatStopwatchTime(member.membersTime)}</div>
+                      <div className="text-[12px] flex">
                         ({formatStopwatchTime(member.time)})
-                      </span>
+                      </div>
                     </div>
                   ) : null}
                 </div>
