@@ -1,8 +1,8 @@
 const Team = ({ members }) => {
   return (
-    <div className="text-white md:h-[284px] h-72">
+    <div className="text-white md:h-[284px] h-[172px]">
       <h3 className="text-xl">Team</h3>
-      <div className="h-64 overflow-auto">
+      <div className="md:h-64 h-36 overflow-auto">
         {members.length > 0 ? (
           <ul className="mt-2">
             {members.map((member, idx) => {
