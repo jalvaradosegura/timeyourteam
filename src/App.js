@@ -36,7 +36,7 @@ const App = () => {
           </div>
           <div className="sm:col-span-2 sm:border-l p-4 space-y-4 w-full flex flex-col justify-center">
             <AddMemberInput members={members} setMembers={setMembers} />
-            <Team members={members} memberIdx={memberIdx} />
+            <Team members={members} memberIdx={memberIdx} setMembers={setMembers}/>
           </div>
         </div>
       </div>
