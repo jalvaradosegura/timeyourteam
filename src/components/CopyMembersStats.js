@@ -9,7 +9,6 @@ const CopyMembersStats = ({ members }) => {
     setInterval(() => {
       setShowCopy(true)
     }, 1500)
-
   }
 
   const copyToClipboard = () => {
@@ -21,19 +20,21 @@ const CopyMembersStats = ({ members }) => {
     const messageHeader = "Time Your Team\n\n"
 
     let messageBody = ""
-    let totalTime = "00:00,00"
+    let totalTime = "00:00:00"
     members.map((member, idx) => {
       let membersTime = member.membersTime ? member.membersTime : null
       if (membersTime) {
-	let fullTime = membersTime.split(":")
-	membersTime = `${fullTime[0]}:${fullTime[1]},${fullTime[2]}`
+        let membersTimeSplitted = membersTime.split(":")
+        membersTime = `${membersTimeSplitted[0]}:${membersTimeSplitted[1]},${membersTimeSplitted[2]}`
       } else {
-	membersTime = "-"
+        membersTime = "-"
       }
       messageBody += `${member.name}: ${membersTime}\n`
 
       if (member.time) {
         totalTime = member.time
+        let totalTimeSplitted = totalTime.split(":")
+        totalTime = `${totalTimeSplitted[0]}:${totalTimeSplitted[1]},${totalTimeSplitted[2]}`
       }
 
       if (idx === members.length - 1) {
