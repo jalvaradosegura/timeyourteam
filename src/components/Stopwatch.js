@@ -1,9 +1,15 @@
 import { useEffect, useState } from "react"
 
-const Stopwatch = ({ memberIdx, members, setMemberIdx, setMembers }) => {
+const Stopwatch = ({
+  memberIdx,
+  members,
+  newStart,
+  setNewStart,
+  setMemberIdx,
+  setMembers,
+}) => {
   const [time, setTime] = useState(0)
   const [timerOn, setTimerOn] = useState(false)
-  const [newStart, setNewStart] = useState(true)
 
   const [previousTime, setPreviousTime] = useState(0)
 
@@ -56,7 +62,7 @@ const Stopwatch = ({ memberIdx, members, setMemberIdx, setMembers }) => {
     let newMembers = [...members]
     if (memberIdx > newMembers.length - 1) {
       newMembers[memberIdx] = {
-        name: `Member ${memberIdx + 1}`,
+        name: `bot ${memberIdx + 1}`,
         time: globalTimeStr,
         membersTime: membersTimeStr,
       }

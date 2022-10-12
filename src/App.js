@@ -10,12 +10,14 @@ const App = () => {
 
     if (initialValue != null) {
       initialValue = initialValue.map((member, idx) => {
-        return { ...member, time: null }
+        return { ...member, time: null, membersTime: null }
       })
     }
 
     return initialValue || []
   })
+
+  const [newStart, setNewStart] = useState(true)
 
   useEffect(() => {
     localStorage.setItem("members", JSON.stringify(members))
@@ -32,11 +34,18 @@ const App = () => {
               setMembers={setMembers}
               memberIdx={memberIdx}
               setMemberIdx={setMemberIdx}
+              newStart={newStart}
+              setNewStart={setNewStart}
             />
           </div>
           <div className="sm:col-span-2 sm:border-l p-4 space-y-4 w-full flex flex-col justify-center">
             <AddMemberInput members={members} setMembers={setMembers} />
-            <Team members={members} memberIdx={memberIdx} setMembers={setMembers}/>
+            <Team
+              newStart={newStart}
+              members={members}
+              memberIdx={memberIdx}
+              setMembers={setMembers}
+            />
           </div>
         </div>
       </div>
