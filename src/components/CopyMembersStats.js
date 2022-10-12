@@ -6,7 +6,7 @@ const CopyMembersStats = ({ members }) => {
   const copyPressed = () => {
     setShowCopy(false)
     copyToClipboard()
-    setInterval(() => {
+    setTimeout(() => {
       setShowCopy(true)
     }, 1500)
   }
