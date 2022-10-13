@@ -1,4 +1,5 @@
 import { CopyMembersStats } from "."
+import { XMark } from "./Svgs"
 
 const formatStopwatchTime = (timeStr) => {
   if (timeStr == null) {
@@ -25,7 +26,7 @@ const Team = ({ memberIdx, members, newStart, setMembers }) => {
     <div className="text-white md:h-[284px] h-[172px]">
       <div className="flex items-center space-x-2">
         <h3 className="text-xl">Team</h3>
-        <CopyMembersStats members={members}/>
+        <CopyMembersStats members={members} />
       </div>
       <div className="md:h-64 h-36 overflow-auto">
         {members.length > 0 ? (
@@ -54,21 +55,9 @@ const Team = ({ memberIdx, members, newStart, setMembers }) => {
                   </div>
                   <div className="col-span-1 flex items-center justify-center space-x-1">
                     {newStart ? (
-                      <svg
-                        xmlns="http://www.w3.org/2000/svg"
-                        fill="none"
-                        viewBox="0 0 24 24"
-                        strokeWidth={1.5}
-                        stroke="currentColor"
-                        className="w-3 h-3 cursor-pointer text-white hover:text-gray-200"
-                        onClick={() => deleteRow(idx)}
-                      >
-                        <path
-                          strokeLinecap="round"
-                          strokeLinejoin="round"
-                          d="M6 18L18 6M6 6l12 12"
-                        />
-                      </svg>
+                      <span onClick={() => deleteRow(idx)}>
+                        <XMark />
+                      </span>
                     ) : null}
                   </div>
                 </div>

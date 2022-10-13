@@ -26,6 +26,7 @@ const App = () => {
   return (
     <div className="flex flex-col justify-between min-h-screen bg-gradient-to-r from-[#FCD04C] to-[#F97416]">
       <Navbar />
+
       <div className="grid place-items-center p-4">
         <div className="p-4 max-w-5xl grid gap-4 sm:grid-cols-5 w-full">
           <div className="sm:col-span-3 w-full self-center">
